@@ -9,10 +9,10 @@ describe('Zootopia webpage testcases', () => {
 
 
   beforeEach(() => {
-    //login and add one product
+    //login before each test case :
 
     cy.login() 
-    cy.get('[data-id="2862"]').click()
+    
      
   });
 
@@ -21,10 +21,7 @@ describe('Zootopia webpage testcases', () => {
  // test case #1:Add product to a cart
 
   it('Add product to a cart',() =>{
-    cy.get('.seepro').first().click()
-    cy.get('[data-id="1537"]').should('be.visible').click() //add product to a cart
-    cy.get('.cart-items-count').last().click()
-    cy.get('.cart-img').should('be.visible')   //make sure cart is not empty 
+        cy.addproduct()
    
 
   })
@@ -33,12 +30,8 @@ describe('Zootopia webpage testcases', () => {
 
    // test case #2: Remove products from the cart
   it('Remove products from the cart',() =>{
-    cy.get('.seepro').first().click()
-    cy.get('[data-id="1537"]').should('be.visible').click() //add product to a cart
-    cy.get('.cart-items-count').last().click()  //go to a cart
-    cy.get('.cart-img').should('be.visible')   //make sure cart is not empty 
-    cy.get('[data-name="Ellipse 42"]').first().click()
-    cy.get('[data-name="Ellipse 42"]').last().click()
+    cy.addproduct()
+    cy.get('[data-name="Ellipse 42"]').should('be.visible').click()   //delete product from the cart 
     cy.contains('კალათა ცარიელია').should('be.visible')
 
 
@@ -61,6 +54,7 @@ describe('Zootopia webpage testcases', () => {
   // test case #4 : Verify products still in the cart after page refresh 
 
    it('cart after page-refresh',() =>{
+    cy.addproduct()
     cy.get('.cart-items-count').last().click()
     cy.contains('კალათა ცარიელია').should('not.be.visible') //check that cart is not empty
     cy.reload()                    //refresh
@@ -72,7 +66,8 @@ describe('Zootopia webpage testcases', () => {
    //test case #5 : Verify that cart persists after logout and login
 
    it('cart after logout-login',() =>{
-    cy.log('check the cart')
+    cy.addproduct()
+    cy.log('check the cart')   
     cy.get('.cart-items-count').last().click()  
     cy.contains('კალათა ცარიელია').should('not.be.visible')  //verify that cart is not empty
     cy.log('logout')

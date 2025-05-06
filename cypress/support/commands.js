@@ -1,30 +1,9 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+
 
 import data from '../fixtures/correctData.json'
+
+//registration command:
 
 Cypress.Commands.add('registration', () => { 
     cy.visit('testzootopia.loremipsum.ge/ka')
@@ -38,11 +17,12 @@ Cypress.Commands.add('registration', () => {
     cy.get('[name="reg_password_confirmation"]').type(data.password)
     cy.get('[data-name="Group 15376"]').first().click()             //click register button
     cy.get('.regsub').click()  //account is created
+    cy.contains('account is created').should('be.visible')  //make sure accaunt is created and succes message appears
 
 
  })
 
-
+//login :
  Cypress.Commands.add('login', () => { 
     cy.visit('testzootopia.loremipsum.ge/ka')
     cy.get('.rprof').last().click()
@@ -57,10 +37,28 @@ Cypress.Commands.add('registration', () => {
  })
   
  //command for loggin out
+
  Cypress.Commands.add('logout', () => { 
     cy.get('.iprof').last().click()
     cy.get('#signout').last().click({ force: true })
-
+    cy.contains('შესვლა')
+//verify that user is logged out
+    
 
 
  })
+
+ //command for adding product to the cart:
+
+
+
+ Cypress.Commands.add('addproduct', () => { 
+
+   cy.get('.seepro').first().click()
+   cy.get('[data-id="1537"]').should('be.visible').click() //add product to a cart
+   cy.get('.cart-items-count').last().click()
+   cy.get('.cart-img').should('be.visible')   //make sure cart is not empty 
+   
+
+})
+
