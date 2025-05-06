@@ -55,7 +55,8 @@ Cypress.Commands.add('registration', () => {
 
 
  })
-
+  
+ //command for loggin out
  Cypress.Commands.add('logout', () => { 
     cy.get('.iprof').last().click()
     cy.get('#signout').last().click({ force: true })

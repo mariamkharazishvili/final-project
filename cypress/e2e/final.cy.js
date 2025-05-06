@@ -9,8 +9,9 @@ describe('Zootopia webpage testcases', () => {
 
 
   beforeEach(() => {
+    //login and add one product
 
-    cy.login()
+    cy.login() 
     cy.get('[data-id="2862"]').click()
      
   });
@@ -48,7 +49,7 @@ describe('Zootopia webpage testcases', () => {
  // test case #3: Verify personal information is saved after registration
 
   it('Personal information',() =>{
-    cy.get('.iprof').last().click()
+    cy.get('.iprof').last().click()  //visit profile page
     cy.get('[data="mariam kharazishvili"]').should('have.value', data.full_name)
     cy.get('[data="551212112"]').should('have.value', data.phone_num)
     cy.get('[data="14211071182"]').should('have.value', data.ID)
