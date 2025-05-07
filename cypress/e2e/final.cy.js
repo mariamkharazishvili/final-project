@@ -2,10 +2,10 @@ import data from '../fixtures/correctData.json'
 
 describe('Zootopia webpage testcases', () => {
 
-  //it('registration',() =>{
+  // it('registration',() =>{
 
-    //cy.registration()  -- 
-  //})
+  //   cy.registration()  
+  // })
 
 
   beforeEach(() => {
@@ -21,7 +21,7 @@ describe('Zootopia webpage testcases', () => {
  // test case #1:Add product to a cart
 
   it('Add product to a cart',() =>{
-        cy.addproduct()
+       cy.addproduct()
    
 
   })
@@ -44,9 +44,9 @@ describe('Zootopia webpage testcases', () => {
   it('Personal information',() =>{
     cy.get('.iprof').last().click()  //visit profile page
     cy.get('[data="mariam kharazishvili"]').should('have.value', data.full_name)
-    cy.get('[data="551212112"]').should('have.value', data.phone_num)
-    cy.get('[data="14211071182"]').should('have.value', data.ID)
-    cy.get('[data="kharazishvilimariam2004@gmail.com"]').should('have.value', data.email)
+    cy.get('[data="551200112"]').should('have.value', data.phone_num)
+    cy.get('[data="14217171102"]').should('have.value', data.ID)
+    cy.get('[data="kharazishvilimariam2004+11@gmail.com"]').should('have.value', data.email)
 
 
    })
